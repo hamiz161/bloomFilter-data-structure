@@ -77,4 +77,6 @@ public class BloomFilter {
     public double fpp() {
         return 0.0; // TODO À compléter
     }
+
+
 }
