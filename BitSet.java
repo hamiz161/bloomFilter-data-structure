@@ -1,6 +1,6 @@
 /**
- * @author Prénom Nom (Matricule)
- * @author Prénom Nom (Matricule)
+ ** @author Hamza Guerabli - 20112229
+ * @author Yuyin Ding  - 20125263
  */
 public class BitSet {
     byte numSet [];
