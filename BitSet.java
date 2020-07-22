@@ -26,7 +26,7 @@ public class BitSet {
     public boolean get(int bitIndex)throws IndexOutOfBoundsException {
 
         if(bitIndex > limite || bitIndex <0)
-             throw new IndexOutOfBoundsException("index invalide");
+             throw new IndexOutOfBoundsException("index invalid");
         
         int indiceTab = (int)(bitIndex/this.tailleByte);
         int posCase = bitIndex % (int)this.tailleByte;
@@ -45,7 +45,7 @@ public class BitSet {
      */
     public void set(int bitIndex) throws IndexOutOfBoundsException{
         if(bitIndex > limite || bitIndex <0)
-             throw new IndexOutOfBoundsException("index invalide");
+             throw new IndexOutOfBoundsException("index invalid");
 
         int indiceTab = (int)(bitIndex/this.tailleByte);
         int posCase = bitIndex % (int)this.tailleByte;
@@ -62,9 +62,10 @@ public class BitSet {
      */
     public void clear(int bitIndex) throws IndexOutOfBoundsException {
         if(bitIndex > limite || bitIndex <0)
-             throw new IndexOutOfBoundsException("index invalide");
+             throw new IndexOutOfBoundsException("index invalid");
 
-        if(get(bitIndex)){
+        if(get(bitIndex)){  //vérification si bitIndex est true
+
             int indiceTab = (int)(bitIndex/this.tailleByte);
             int posCase = bitIndex % (int)this.tailleByte;
             byte temp = 1;
@@ -73,10 +74,10 @@ public class BitSet {
         }
     }
 
-    public void ajouter(int position, int valeur){
+   /* public void ajouter(int position, int valeur){
         this.numSet[position]= (byte)valeur;
     }
     public byte getValeur(int index){
         return this.numSet[index];
-    }
+    }*/
 }
