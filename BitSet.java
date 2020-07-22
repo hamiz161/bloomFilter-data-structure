@@ -64,14 +64,19 @@ public class BitSet {
         if(bitIndex > limite || bitIndex <0)
              throw new IndexOutOfBoundsException("index invalide");
 
-        int indiceTab = (int)(bitIndex/this.tailleByte);
-        int posCase = bitIndex % (int)this.tailleByte;
-        byte temp = 1;
-        temp<<=posCase;
-        this.numSet[indiceTab] -= temp;
+        if(get(bitIndex)){
+            int indiceTab = (int)(bitIndex/this.tailleByte);
+            int posCase = bitIndex % (int)this.tailleByte;
+            byte temp = 1;
+            temp<<=posCase;
+            this.numSet[indiceTab] -= temp;
+        }
     }
 
     public void ajouter(int position, int valeur){
         this.numSet[position]= (byte)valeur;
+    }
+    public byte getValeur(int index){
+        return this.numSet[index];
     }
 }
