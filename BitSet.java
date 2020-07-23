@@ -73,11 +73,15 @@ public class BitSet {
             this.numSet[indiceTab] -= temp;
         }
     }
+    public void clearBitSet(){
+        this.numSet = new byte[this.numSet.length];
+    }
 
-   /* public void ajouter(int position, int valeur){
+
+   public void ajouter(int position, int valeur){
         this.numSet[position]= (byte)valeur;
     }
     public byte getValeur(int index){
         return this.numSet[index];
-    }*/
+    }
 }

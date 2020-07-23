@@ -13,12 +13,14 @@ public class BloomFilter {
     private   double falsePosProb ;
     public int numBits;
     public int numHashes;
+    public  int nombreKeyajouter;
     private BitSet bitSet;
 
     public BloomFilter(int numBits, int numHashes) {
         this.numHashes = numHashes ;
         this.numBits = numBits;
         this.bitSet = new BitSet(this.numBits);
+        this.nombreKeyajouter = 0;
     }
 
     /**
@@ -35,6 +37,7 @@ public class BloomFilter {
         this.numBits = (int) (Math.ceil(-this.numElems * Math.log(this.falsePosProb))/Math.pow(Math.log(2),2));
         this.numHashes = (int)(Math.ceil((this.numBits*Math.log(2))/numElems));
         this.bitSet = new BitSet(this.numBits);
+        this.nombreKeyajouter = 0;
 
     }
 
@@ -44,7 +47,12 @@ public class BloomFilter {
      * @param key l'élément à insérer
      */
     public void add(byte[] key) {
-        // TODO À compléter
+
+        int resultas [] = bloomHash(key,this.numHashes);
+        for (int i = 0; i < this.numHashes ; i++) {
+            this.bitSet.set(resultas[i]);
+        }
+        this.nombreKeyajouter++;
     }
 
     /**
@@ -61,7 +69,8 @@ public class BloomFilter {
      * Remet à zéro le filtre de Bloom.
      */
     public void reset() {
-        // TODO À compléter
+        this.bitSet.clearBitSet();
+       this.nombreKeyajouter = 0;
     }
 
     /**
@@ -70,7 +79,7 @@ public class BloomFilter {
      * @return nombre de bits
      */
     public int size() {
-        return 0; // TODO À compléter
+        return this.numBits;
     }
 
     /**
@@ -79,7 +88,7 @@ public class BloomFilter {
      * @return nombre d'éléments insérés
      */
     public int count() {
-        return 0; // TODO À compléter
+        return this.nombreKeyajouter;
     }
 
     /**
@@ -90,9 +99,8 @@ public class BloomFilter {
     public double fpp() {
         return 0.0; // TODO À compléter
     }
+     public int [] bloomHash(byte [] donnés ,int hashes){
+        return new int[hashes] ;
+     }
 
-
-    public BitSet getBitSet() {
-        return bitSet;
-    }
 }
