@@ -3,9 +3,10 @@
  * @author Yuyin Ding  - 20125263
  */
 public class BitSet {
-    byte numSet [];
+    byte numSet[];
     double tailleByte = 8.0;
-    int limite ;
+    int limite;
+
     /**
      * Crée un ensemble de bits, d'une certaine taille. Ils sont initialisés à
      * {@code false}.
@@ -14,7 +15,7 @@ public class BitSet {
      */
     public BitSet(int nbits) {
         this.limite = nbits - 1;
-        this.numSet =  new byte [(int) Math.ceil(nbits/tailleByte)];
+        this.numSet = new byte[(int) Math.ceil(nbits / tailleByte)];
     }
 
     /**
@@ -23,13 +24,13 @@ public class BitSet {
      * @param bitIndex l'index du bit
      * @return la valeur du bit à l'index spécifié
      */
-    public boolean get(int bitIndex)throws IndexOutOfBoundsException {
+    public boolean get(int bitIndex) throws IndexOutOfBoundsException {
 
-        if(bitIndex > limite || bitIndex <0)
-             throw new IndexOutOfBoundsException("index invalid");
-        
-        int indiceTab = (int)(bitIndex/this.tailleByte);
-        int posCase = bitIndex % (int)this.tailleByte;
+        if (bitIndex > limite || bitIndex < 0)
+            throw new IndexOutOfBoundsException("index invalid");
+
+        int indiceTab = (int) (bitIndex / this.tailleByte);
+        int posCase = bitIndex % (int) this.tailleByte;
         byte temp = this.numSet[indiceTab];
 
         temp >>= posCase;
@@ -43,16 +44,16 @@ public class BitSet {
      *
      * @param bitIndex l'index du bit
      */
-    public void set(int bitIndex) throws IndexOutOfBoundsException{
-        if(bitIndex > limite || bitIndex <0)
-             throw new IndexOutOfBoundsException("index invalid");
+    public void set(int bitIndex) throws IndexOutOfBoundsException {
+        if (bitIndex > limite || bitIndex < 0)
+            throw new IndexOutOfBoundsException("index invalid");
 
-        int indiceTab = (int)(bitIndex/this.tailleByte);
-        int posCase = bitIndex % (int)this.tailleByte;
+        int indiceTab = (int) (bitIndex / this.tailleByte);
+        int posCase = bitIndex % (int) this.tailleByte;
         byte temp = 1;
-        temp<<=posCase;
+        temp <<= posCase;
         this.numSet[indiceTab] |= temp;
-        
+
     }
 
     /**
@@ -61,27 +62,33 @@ public class BitSet {
      * @param bitIndex l'index du bit
      */
     public void clear(int bitIndex) throws IndexOutOfBoundsException {
-        if(bitIndex > limite || bitIndex <0)
-             throw new IndexOutOfBoundsException("index invalid");
+        if (bitIndex > limite || bitIndex < 0)
+            throw new IndexOutOfBoundsException("index invalid");
 
-        if(get(bitIndex)){  //vérification si bitIndex est true
+        if (get(bitIndex)) {  //vérification si bitIndex est true
 
-            int indiceTab = (int)(bitIndex/this.tailleByte);
-            int posCase = bitIndex % (int)this.tailleByte;
+            int indiceTab = (int) (bitIndex / this.tailleByte);
+            int posCase = bitIndex % (int) this.tailleByte;
             byte temp = 1;
-            temp<<=posCase;
+            temp <<= posCase;
             this.numSet[indiceTab] -= temp;
         }
     }
-    public void clearBitSet(){
+
+    /**
+     * mettre le bitSet a zero
+     */
+    public void clearBitSet() {
         this.numSet = new byte[this.numSet.length];
     }
 
 
-   public void ajouter(int position, int valeur){
+  /* public void ajouter(int position, int valeur){
         this.numSet[position]= (byte)valeur;
     }
     public byte getValeur(int index){
         return this.numSet[index];
     }
+   //this.numHashes = (int)(Math.ceil((this.numBits*Math.log(2))/numElems));
+    */
 }

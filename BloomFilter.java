@@ -19,8 +19,10 @@ public class BloomFilter {
     public BloomFilter(int numBits, int numHashes) {
         this.numHashes = numHashes ;
         this.numBits = numBits;
+        this.numElems = (int) ((int)(this.numBits / this.numHashes) * Math.log(2));
         this.bitSet = new BitSet(this.numBits);
         this.nombreKeyajouter = 0;
+        this.falsePosProb = fpp();
     }
 
     /**
@@ -35,7 +37,7 @@ public class BloomFilter {
         this.numElems = numElems;
         this.falsePosProb = falsePosProb;
         this.numBits = (int) (Math.ceil(-this.numElems * Math.log(this.falsePosProb))/Math.pow(Math.log(2),2));
-        this.numHashes = (int)(Math.ceil((this.numBits*Math.log(2))/numElems));
+        this.numHashes = (int)(Math.ceil(-(Math.log(this.falsePosProb)/Math.log(2)))) ;
         this.bitSet = new BitSet(this.numBits);
         this.nombreKeyajouter = 0;
 
@@ -48,9 +50,9 @@ public class BloomFilter {
      */
     public void add(byte[] key) {
 
-        int resultas [] = bloomHash(key,this.numHashes);
+        int result [] = bloomHash(key,this.numHashes);
         for (int i = 0; i < this.numHashes ; i++) {
-            this.bitSet.set(resultas[i]);
+            this.bitSet.set(result[i]);
         }
         this.nombreKeyajouter++;
     }
@@ -97,9 +99,16 @@ public class BloomFilter {
      * @return probabilité de faux positifs
      */
     public double fpp() {
-        return 0.0; // TODO À compléter
+        return Math.pow(1-Math.exp(-this.numHashes * numElems /(double) this.numBits),this.numHashes);
     }
-     public int [] bloomHash(byte [] donnés ,int hashes){
+
+    /**
+     *
+     * @param donnes
+     * @param hashes
+     * @return
+     */
+     public int [] bloomHash(byte [] donnes ,int hashes){
         return new int[hashes] ;
      }
 
