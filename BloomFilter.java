@@ -123,9 +123,9 @@ public class BloomFilter {
 
          for (int i = 0; i < hashes ; i++) {
              resultat [i] = hash(key , i +1 ) ;
-             System.out.print(resultat [i] + "  ");
+
          }
-         System.out.println();
+
         return resultat ;
      }
 
