@@ -3,7 +3,10 @@
  * @author Yuyin Ding  - 20125263
  *
  * méthode hash ===> La figure 5.4 du Weiss
+ * inspération pour les formules prob , numBits ,numHashs sur wikipedia
+ * ==> https://en.wikipedia.org/wiki/Bloom_filter#Examples
  */
+
 public class BloomFilter {
     /**
      * Crée un filtre de Bloom basé sur la taille de l'ensemble de bits et du
@@ -11,8 +14,8 @@ public class BloomFilter {
      * @param numBits taille de l'ensemble de bits
      * @param numHashes nombre de fonctions de hachage
      */
-    private int numElems ;
-    private   double falsePosProb ;
+    public int numElems ;
+    public   double falsePosProb ;
     public int numBits;
     public int numHashes;
     public  int nombreKeyajouter;
@@ -106,7 +109,7 @@ public class BloomFilter {
      * @return probabilité de faux positifs
      */
     public double fpp() {
-        return Math.pow(1-Math.exp(-this.numHashes * numElems /(double) this.numBits),this.numHashes);
+        return Math.pow(1-Math.exp(-this.numHashes * (double)this.nombreKeyajouter /(double) this.numBits),this.numHashes);
     }
 
     /**
