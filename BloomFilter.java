@@ -122,8 +122,10 @@ public class BloomFilter {
          int [] resultat = new int[hashes];
 
          for (int i = 0; i < hashes ; i++) {
-             resultat [i] = hash(key , i ) ;
+             resultat [i] = hash(key , i +1 ) ;
+             System.out.print(resultat [i] + "  ");
          }
+         System.out.println();
         return resultat ;
      }
 
@@ -135,7 +137,7 @@ public class BloomFilter {
      * @return
      */
      public int hash(byte [] key, int indice){
-         int x = 37 * indice ;
+         int x = (127 * indice) + 1 ;
          int hashVal = 0 ;
          for( int i = 0; i < key.length; i++ ) {
              hashVal = x * hashVal + key[i];
