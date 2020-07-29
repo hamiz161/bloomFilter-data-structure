@@ -1,6 +1,8 @@
 /**
  * * @author Hamza Guerabli - 20112229
  * @author Yuyin Ding  - 20125263
+ *
+ * méthode hash ===> La figure 5.4 du Weiss
  */
 public class BloomFilter {
     /**
@@ -14,7 +16,7 @@ public class BloomFilter {
     public int numBits;
     public int numHashes;
     public  int nombreKeyajouter;
-    private BitSet bitSet;
+    public BitSet bitSet;
 
     public BloomFilter(int numBits, int numHashes) {
         this.numHashes = numHashes ;
@@ -50,7 +52,7 @@ public class BloomFilter {
      */
     public void add(byte[] key) {
 
-        int result [] = bloomHash(key,this.numHashes);
+        int [] result = bloomHash(key,this.numHashes);
         for (int i = 0; i < this.numHashes ; i++) {
             this.bitSet.set(result[i]);
         }
@@ -64,7 +66,12 @@ public class BloomFilter {
      * @return si l'élément est possiblement dans le filtre
      */
     public boolean contains(byte[] key) {
-        return false; // TODO À compléter
+        int [] resultat = bloomHash(key,this.numHashes);
+        boolean existe = true;
+        for (int i = 0; i <resultat.length && existe; i++) {
+            existe  = existe && bitSet.get(resultat[i]);
+        }
+        return existe;
     }
 
     /**
@@ -104,12 +111,37 @@ public class BloomFilter {
 
     /**
      *
-     * @param donnes
+     * @param key
      * @param hashes
      * @return
      */
-     public int [] bloomHash(byte [] donnes ,int hashes){
-        return new int[hashes] ;
+     public int [] bloomHash(byte [] key ,int hashes){
+         int [] resultat = new int[hashes];
+
+         for (int i = 0; i < hashes ; i++) {
+             resultat [i] = hash(key , i ) ;
+         }
+        return resultat ;
+     }
+
+
+    /**
+     *
+     * @param key
+     * @param indice
+     * @return
+     */
+     public int hash(byte [] key, int indice){
+         int x = 37 * indice ;
+         int hashVal = 0 ;
+         for( int i = 0; i < key.length; i++ ) {
+             hashVal = x * hashVal + key[i];
+             hashVal %= numBits;
+
+             if (hashVal < 0)
+                 hashVal += numBits;
+         }
+         return hashVal;
      }
 
 }

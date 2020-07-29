@@ -5,15 +5,12 @@
 public class Main {
 
     public static void main(String[] args) {
-        BloomFilter bloom =new BloomFilter(10000,5);
+        BloomFilter bloom =new BloomFilter(10,0.1);
             System.out.println(bloom.numBits);
             System.out.println(bloom.numHashes);
             System.out.println(bloom.fpp());
-
-            BloomFilter hamza = new BloomFilter(1000,0.5);
-            System.out.println(hamza.numBits);
-            System.out.println(hamza.numHashes);
-            System.out.println(hamza.fpp());
+            bloom.add(new byte[]{25 , 26 , 11});
+        System.out.println(bloom.contains(new byte[]{25 , 26 , 71}));
 
     }
 }

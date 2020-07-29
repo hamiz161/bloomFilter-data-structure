@@ -83,12 +83,4 @@ public class BitSet {
     }
 
 
-  /* public void ajouter(int position, int valeur){
-        this.numSet[position]= (byte)valeur;
-    }
-    public byte getValeur(int index){
-        return this.numSet[index];
-    }
-   //this.numHashes = (int)(Math.ceil((this.numBits*Math.log(2))/numElems));
-    */
 }
