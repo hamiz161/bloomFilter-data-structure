@@ -5,7 +5,7 @@
 public class Main {
 
     public static void main(String[] args) {
-        BloomFilter bloom =new BloomFilter(555,1.0);
+      /*  BloomFilter bloom =new BloomFilter(555,1.0);
             System.out.println(bloom.numBits);
             System.out.println(bloom.numHashes);
             System.out.println(bloom.fpp());
@@ -14,7 +14,7 @@ public class Main {
          bloom.add(new byte[]{88 , 2 , 44});
            System.out.println(bloom.fpp());
 
-           System.out.println(bloom.fpp());
+           System.out.println(bloom.fpp());*/
 
     }
 }

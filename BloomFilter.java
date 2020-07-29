@@ -114,8 +114,8 @@ public class BloomFilter {
 
     /**
      *
-     * @param key
-     * @param hashes
+     * @param key l élément a hacher
+     * @param hashes nombre des fonctionde hachage
      * @return
      */
      public int [] bloomHash(byte [] key ,int hashes){
